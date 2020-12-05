@@ -9,6 +9,7 @@ class SearchForBooks extends Component{
   state = {  
     result: []
   }
+  
 
   searchBooks = (query) => {
     if(!query) {
@@ -17,8 +18,9 @@ class SearchForBooks extends Component{
       })
     } else {
         BooksAPI.search(query).then(books => {
+          console.log(this.props)
+          books.map(book => (this.props.books.filter((bookItem) => bookItem.id === book.id).map(bookItem => book.shelf = bookItem.shelf)))
           this.setState({ result: books })
-          console.log(books)
         })
     }
 }
